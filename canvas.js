@@ -24,16 +24,22 @@ let create = (number, color) => {
     }
     return group;
 };
-
-let particles = create(200, "yellow");
+let particlesList = ["blue", "yellow", "red"]
+let allParticles = [] // empty list to push particles 
+//let particles = create(200, "red");
+for(let i = 0; i<particlesList.length; i++){
+    let particles = create(200, particlesList[i])
+    allParticles.push(particles)
+}
 
 let update = () => {
     m.clearRect(0, 0, 500, 500);
     draw(0, 0, "black", 500);
 
-    for (let i = 0; i < particles.length; i++) {
-        let p = particles[i];
-        draw(p.x, p.y, p.color, 5);
+    for(let group of allParticles){
+        for (let p of group){
+            draw(p.x,p.y, p.color, 5);
+        }
     }
 
     requestAnimationFrame(update);
