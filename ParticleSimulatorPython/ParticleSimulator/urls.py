@@ -16,10 +16,9 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from ParticleSimApp.views import home, welcome  # Import the vieews
-
+from ParticleSimApp.views import particle_simulator
 urlpatterns = [
-    path("admin/", admin.site.urls),
-    path('home/', home),
-    path('', welcome) #welcoming page, does not need prefix url pattern (add comma at the end)
+    path("admin/", admin.site.urls), 
+    #path("" , welcome),
+    path('', particle_simulator, name = "particle_simulator") #welcoming page, does not need prefix url pattern (add comma at the end)
 ]

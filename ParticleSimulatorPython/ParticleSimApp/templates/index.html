@@ -1,0 +1,55 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Particle Simulator</title>
+    <style>
+        body {
+            background-color: black;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .box {
+            background-color: purple;
+            color: white;
+            width: 200px;
+            height: 100px;
+            padding: 2px;
+            text-align: center;
+        }
+        canvas {
+            border: 2px solid white; /* Optional: adds a border around the canvas */
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+        Particle Simulator 
+        By: Jaime Perez, Arjun Daya, and Francisco Benitez
+    </div>
+    <canvas id="life" width="500" height="500"></canvas>
+    <script>
+        let canvas = document.getElementById('life');
+        let ctx = canvas.getContext('2d');
+        if (!ctx) {
+            console.error("Canvas context not obtained");
+        }
+
+        let drawParticle = (x, y, color) => {
+            ctx.fillStyle = color;
+            ctx.fillRect(x, y, 5, 5); // Size of the particle
+        };
+
+        let particles = {{ particles | safe }};
+
+        particles.forEach(particle => {
+            drawParticle(particle.x, particle.y, particle.color);
+        });
+    </script>
+</body>
+</html>
