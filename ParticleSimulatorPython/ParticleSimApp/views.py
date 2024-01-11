@@ -1,50 +1,65 @@
 from django.shortcuts import render
 import random
-<<<<<<< Updated upstream
-=======
 import math
->>>>>>> Stashed changes
-
 # Create your views here.
 from django.http import HttpResponse
+from . import periodicElement
 
-<<<<<<< Updated upstream
-=======
-###################################################
->>>>>>> Stashed changes
+#Constant
+gravity = 9.81
+
+class Particle: 
+    def __init__(self, element_name, x ,y):
+        self.element_name = element_name
+        self.x = x
+        self.y = y
+        self.mass = periodicElement.get_elementMass(element_name)
+        self.charge = periodicElement.get_electronegativity(element_name)
+
+
 def generate_particles(num_simulations):
     colors = ['blue', 'red', 'yellow', 'blue', 'purple']
-    all_particles = [] #empty list to append all particles to be simlauted 
-    for color in colors:
-        for i in range(num_simulations):
-            particle = {'x': random.uniform(50,450), 'y':random.uniform(50,450), 'color': color}
-            all_particles.append(particle) #contains x y and color
+    #Testing random elements
+    elements = ['Hydrogen', 'Helium', 'Lithium', 'Beryllium', 'Boron'] 
+    all_particles = []
+
+    for i in range(num_simulations):
+        element = random.choice(elements)  # Randomly choose an element
+        color = random.choice(colors)      # Randomly choose a color
+        x = random.uniform(50, 450)
+        y = random.uniform(50, 450)
+        particle = Particle(element, x, y)
+        particle.color = color  # Assign color as an additional attribute
+        all_particles.append(particle)
+    
     return all_particles
+
 
 def particle_simulator(request):
     particles = generate_particles(100)
     return render(request, 'index.html', {'particles': particles})
 
-<<<<<<< Updated upstream
-=======
-def particle_interaction(particle1, particle2, g): 
-    fx = 0
-    fy = 0
-    #distance: 
+
+def particle_interaction(particle1, particle2, g):
     dx = particle1.x - particle2.x
-    dy = particle1.y -particle2.y
-    # calculate the distance between both particles using pytharogeom theorem
-    distance = math.sqrt(dx*dx + dy*dy)
+    dy = particle1.y - particle2.y 
+    distance = math.sqrt(dx**2 + dy**2)
+
     if distance > 0: 
-    #Force (F) = F1 = F2 = G (mass1 * mass2)/ Distance^2
-        Force = g (particle1['Atomic_mass'], particle2['Atomic_mass'])/ distance**2
+        #Gravitational Force: F = G(m1m2)/r^2
+        force = g * (particle1.mass * particle2.mass)/ distance**2
+        return force
+    else: 
+        return None
 
 
-#-=-=-=-=-=-=-=-=-=-=-=-=-=
->>>>>>> Stashed changes
+#Testing:
+particle_interaction("Hydrogen", "Helium", gravity)
+
+#-=-=---=-=-=-
 def home(request):
     return render(request, 'index.html')
 
 def welcome(request):
-    return HttpResponse("Welcome to Particle Simulator\n Made by Jaime Perez, Frankie and Arjun Daya")
+    return HttpResponse("Welcome to Particle Simulator")
 
