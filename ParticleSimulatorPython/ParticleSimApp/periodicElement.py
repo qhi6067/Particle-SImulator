@@ -11,7 +11,7 @@ from selenium.webdriver import ActionChains #allow hovering over item
 
 
 # Set up Chrome options
-"""chrome_options = Options()
+chrome_options = Options()
 chrome_options.add_argument("--headless")  # Ensure GUI is off
 chrome_options.add_argument("--no-sandbox")
 chrome_options.add_argument("--disable-dev-shm-usage")
@@ -20,12 +20,12 @@ chrome_options.add_argument("--disable-dev-shm-usage")
 webdriver_path = '/path/to/chromedriver'
 
 # Set up driver
-driver = webdriver.Chrome(options=chrome_options, executable_path=webdriver_path)"""
+driver = webdriver.Chrome(options=chrome_options, executable_path=webdriver_path)
 
 url = 'https://ptable.com/'
 
 #Must allow "Allow Remote Automation" in Safari Settings
-driver = webdriver.Safari() # if using Safari
+#driver = webdriver.Safari() # if using Safari
 driver.get(url)
 
 ##giving time for page to load
@@ -79,7 +79,7 @@ def get_elementMass(elementName):
 
 def get_electronegativity(elementName):
     if True:
-        return None 
+        return 0 #temporary placeholder 
     atom = particle[elementName]
     atomElectro = atom['Electronegativity']
     return atomElectro
@@ -90,10 +90,10 @@ def get_electronegativity(elementName):
 print(particle1)
 particle1Mass = particle1["Atomic_mass"]
 print(particle1Mass)"""
-particle1 = get_elementInfo("Hydrogen")
+"""particle1 = get_elementInfo("Hydrogen")
 print(particle1)
 particle1Mass = get_elementMass("Hydrogen")
 print(f'This is the mass of Hydrogen: {particle1Mass}')
 particleElectro = get_electronegativity("Hydrogen")
 print(f"Electronegativity of Hydrogen is: {particleElectro}")
-print(f"printing all stored data:\n {particle}")
+print(f"printing all stored data:\n {particle}")"""
